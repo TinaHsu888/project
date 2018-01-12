@@ -196,14 +196,15 @@ void setup() {
   }
   //Display time
   time=5*3*60;
+  //start scene sound
+  sound_clock.loop();
 }
 
 void draw() {
   switch(gameState) {
   case GAME_START:
     //backgroundsound
-    sound_clock.play();
-    //sound_clock.playCount(2);
+    //sound_clock.play();
     //display start image
     image(startScene, 0, 0);
     //start button
@@ -284,6 +285,7 @@ void draw() {
       gameState = GAME_STORY;
       startChase=false;
       song.pause();
+      sound_clock.loop();
       disPlay = true;
     }
     popMatrix();
@@ -319,6 +321,7 @@ void draw() {
     //state
     currentState = GAME_RUN2;
     //background sound
+    sound_clock.pause();
     sound_end.pause();
     song.play();
     bloodDisplayBoundary =1170+400;
@@ -371,6 +374,7 @@ void draw() {
     if (loser.x>=BACKGROUND2_WIDTH-loser.w) {
       //if loser reach the end
       loser.reset();
+      sound_clock.loop();
       gameState=GAME_STORY;
       startChase = false;
       song.pause();
@@ -408,6 +412,7 @@ void draw() {
     //state
     currentState = GAME_RUN3;
     //background sound
+    sound_clock.pause();
     sound_end.pause();
     song.play();
     bloodDisplayBoundary=2400-430;
@@ -474,6 +479,7 @@ void draw() {
     //check game state
     if (loser.x>=BACKGROUND3_WIDTH-loser.w) {
       loser.reset();
+      sound_clock.loop();
       gameState = GAME_STORY;
     }
     //info icon
@@ -544,7 +550,7 @@ void draw() {
   case GAME_WIN:
     image(win, 0, 0);
     song.pause();
-    sound_win.play();
+    //sound_win.play();
     if (mouseX>=345 && mouseX<=460 && mouseY>=405 && mouseY<=445) {
       image(returnButton, 0, 0);
       if (mousePressed) {
@@ -669,6 +675,7 @@ void draw() {
         show(story4_5);
       }else {
         gameState=GAME_WIN;
+        sound_win.loop();
       }
     }
 
