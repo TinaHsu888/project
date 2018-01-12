@@ -212,6 +212,7 @@ void draw() {
     if (mouseX>=345 && mouseX<=470 && mouseY>=200 && mouseY<=235) {
       image(startButton2, 0, 0);
       if (mousePressed) {
+         sound_clock.loop();
         gameState=GAME_STORY;
       }
     }
@@ -232,6 +233,7 @@ void draw() {
     sound_clock.pause();
     sound_end.pause();
     song.play();
+    sound_win.pause();
     bloodDisplayBoundary=1170;
     //back Ground translate
     if (loser.x >= 1170) {
@@ -556,6 +558,7 @@ void draw() {
       if (mousePressed) {
         //changee state
         sound_win.pause();
+        sound_clock.loop();
         currentState = GAME_START;
         time=5*3*60;
         gameState=GAME_START;
@@ -590,7 +593,7 @@ void draw() {
     break;
 
   case GAME_INFO:
-    
+
     //display info image
     //image(information1, 0, 0);
     image(explain, 0, 0);
@@ -621,6 +624,8 @@ void draw() {
       } else if (time>0) {
         show(stage1);
       } else {
+        song.loop();
+        song.rewind();
         gameState=GAME_RUN1;
         time = 4*3*60;
       }
@@ -671,11 +676,13 @@ void draw() {
         show(story4_3);
       } else if (time>60*3) {
         show(story4_4);
-      }else if(time>0){
+      } else if (time>0) {
         show(story4_5);
-      }else {
+      } else {
         gameState=GAME_WIN;
-        sound_win.loop();
+        sound_clock.pause();
+        sound_win.rewind();
+        sound_win.play();
       }
     }
 
