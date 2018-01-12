@@ -311,19 +311,6 @@ void draw() {
         gameState=GAME_INFO;
       }
     }
-    ////show explain and stage name
-    //show(stage1);
-    //show(explain);
-
-    //if(storyTime>60*6){
-    //      show(story1_1);
-    //}
-    //else if(storyTime>60*3){
-    //      show(story1_2);
-    //}
-    //else if(storyTime>0){
-    //      show(story1_3);
-    //}
 
 
     break;
@@ -563,7 +550,9 @@ void draw() {
       if (mousePressed) {
         //changee state
         sound_win.pause();
-        gameState=1;
+        currentState = GAME_START;
+        time=5*3*60;
+        gameState=GAME_START;
         //reset
         loser.reset();
         loser.health=5;
