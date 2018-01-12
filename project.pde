@@ -14,7 +14,7 @@ PImage eyeball, hand;
 PImage blood,shadow;
 PImage explain,stage1,stage2,stage3;
 PImage soundiconOFF,soundiconON,stopicon;
-PImage win;
+PImage win,story1,story2,story3;
 
 final int GAME_START = 0, GAME_RUN1 = 1, GAME_RUN2 = 2, GAME_RUN3 = 3, GAME_OVER = 4, GAME_WIN = 5, GAME_INFO = 6;
 int gameState = 0;
@@ -22,7 +22,7 @@ int currentState;
 final int GO_UP =0, GO_RIGHT =1, GO_DOWN =2, GO_LEFT =3;
 
 final int stageShowTime = 300;
-int stageTime,explainTime;
+int stageTime,explainTime,storyTime,storyTime2,storyTime3;
 
 boolean leftState = false;
 boolean rightState = false;
@@ -31,6 +31,9 @@ boolean startChase = false;
 boolean loserHurt = false;
 boolean disPlayExplain = true;
 boolean disPlayStage =true;
+boolean disPlayStory = true;
+boolean disPlayStory2 = true;
+boolean disPlayStory3 = true;
 
 final float BACKGROUND1_WIDTH=1600;
 final float BACKGROUND2_WIDTH=2000;
@@ -43,7 +46,7 @@ int bloodDisplayBoundary;
 //sound
 import ddf.minim.*;
 Minim minim;
-AudioPlayer sound_clock, sound_end, song;
+AudioPlayer sound_clock, sound_end, song,sound_win;
 AudioSample sound_ghost, sound_hurt,sound_jump,sound_burp,sound_powerUp;
 
 Loser loser=new Loser();
@@ -113,12 +116,16 @@ void setup() {
   eyeball = loadImage("img/horribleItem/eyeBall.png");
   hand = loadImage("img/horribleItem/handlong.png");
   shadow = loadImage("img/shadow.png");
-  win = loadImage("img/background/win.jpg");
+  win = loadImage("img/background/win.png");
 
   //bloodItem
   beerImg = loadImage("img/bloodItem/beerTaiwan.png");
   noodleImg = loadImage("img/bloodItem/instantNoodles.png");
   photoImg = loadImage("img/bloodItem/photo.png");
+  //story
+  story1 = loadImage("img/story/story1-1.png");
+  story2 = loadImage("img/story/story1-2.png");
+  story3 = loadImage("img/story/story1-3.png");
 
   //sound
   minim = new Minim(this);
@@ -130,6 +137,7 @@ void setup() {
   sound_jump = minim.loadSample("sound/jump.mp3", 128);
   sound_powerUp = minim.loadSample("sound/powerup.mp3", 128);
   sound_burp = minim.loadSample("sound/burp.mp3", 128);
+  sound_win = minim.loadFile("sound/win.mp3");
   //blood
   blood = loadImage("img/blood.png");
   //icons
@@ -178,8 +186,11 @@ void setup() {
     beers[i]= new Beer(newX, newY, newXSpeed);
   }
   //Display time
-  stageTime = 420;
-  explainTime = 300;
+  stageTime = 420+360;
+  explainTime = 300+360;
+  storyTime = 120;
+  storyTime2 = 240;
+  storyTime3 = 360;
 }
 
 void draw() {
@@ -298,6 +309,9 @@ void draw() {
     stageShow(stage1);
     explainShow(explain);
     
+    storyShow3(story3);
+    storyShow2(story2);
+    storyShow(story1);
     
 
     break;
@@ -533,6 +547,40 @@ void draw() {
 
   case GAME_WIN:
     image(win,0,0);
+    sound_win.play();
+    if (mouseX>=345 && mouseX<=460 && mouseY>=405 && mouseY<=445) {
+      image(returnButton, 0, 0);
+      if (mousePressed) {
+        //changee state
+        sound_win.pause();
+        gameState=1;
+        //reset
+        loser.reset();
+        loser.health=5;
+        backGroundMoveX=0;
+        mom.reset();
+        dad.reset();
+        girl.reset();
+        startChase=false;
+        eyeball1.reset();
+        eyeball2.reset();
+        eyeball3.reset();
+        for (Card i : cards) {
+          if (i == null) continue;
+          i.reset();
+        }
+        for (Noodle i : noodles) {
+          if (i == null) continue;
+          i.reset();
+        }
+        for (Beer i : beers) {
+          if (i == null) continue;
+          i.reset();
+        }
+        photo.reset();
+      }
+    }
+
 
     break;
 
@@ -610,5 +658,35 @@ void explainShow(PImage img2){
     if(explainTime<0){
       disPlayExplain = false;
       explainTime=300;
+    }
+}
+void storyShow(PImage img3){
+  if(disPlayStory){
+      storyTime--;
+      image(img3,0,0) ;
+    } 
+    if(storyTime<0){
+      disPlayStory = false;
+      storyTime=120;
+    }
+}
+void storyShow2(PImage img3){
+  if(disPlayStory2){
+      storyTime2--;
+      image(img3,0,0) ;
+    } 
+    if(storyTime2<0){
+      disPlayStory2 = false;
+      storyTime2=120;
+    }
+}
+void storyShow3(PImage img3){
+  if(disPlayStory3){
+      storyTime3--;
+      image(img3,0,0) ;
+    } 
+    if(storyTime3<0){
+      disPlayStory3 = false;
+      storyTime3=120;
     }
 }
