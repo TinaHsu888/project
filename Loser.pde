@@ -1,7 +1,7 @@
 class Loser {
    float x, y;
   float loserSpeed=3, loserJumpSpeed=9, loserDownSpeed=8;
-  float w = 60, h = 120;
+  float w = 30, h = 120;
   int health = 0;
   float LOSER_INIT_X=0, LOSER_INIT_Y=280;
   float jumpCount, runCount; //runCount change picture when loser is moving
@@ -32,6 +32,7 @@ class Loser {
       y = LOSER_INIT_Y;
       jumpCount=JUMP_TIME;
       upState=false;
+      loserHurt=false;
       moveDirection=0;
       runCount=0;
       //health=5;
@@ -45,7 +46,10 @@ class Loser {
          image(blood,bloodDisplayBoundary-370,0) ;
       }else if(loser.x>370){
          image(blood,loser.x-370,0);
+      }else if(loser.x<width){
+        image(blood,0,0);
       }
+      
     } 
     if(bloodDisplayTime<0){
       loserHurt = false;
@@ -124,7 +128,7 @@ class Loser {
       x=0;
     }
     //println(x,y);
-
+    image(shadow,x+20,396,30,10);
     //show image
     image(loserDisplay, x, y);
   }

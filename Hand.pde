@@ -20,9 +20,10 @@ class Hand {
   }
   void checkCollision(Loser loser) {
     if (handHurtTime<=0) {
-      if (isHit(x, y, w, h, loser.x, loser.y, loser.w, loser.h)) {
+      if (isHit(x, y, w, h, loser.x+15, loser.y, loser.w, loser.h)) {
         loser.hurt();
         handHurtTime=120;
+        sound_hurt.trigger();
       }
     }
   }

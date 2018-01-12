@@ -11,7 +11,7 @@ PImage bloodBar1, bloodBar2, bloodBar3, bloodBar4, bloodBar5;
 PImage mom1, mom2, dad1, dad2, girl1, girl2;
 PImage information1, information2;
 PImage eyeball, hand;
-PImage blood;
+PImage blood,shadow;
 PImage explain,stage1,stage2,stage3;
 PImage soundiconOFF,soundiconON,stopicon;
 
@@ -43,7 +43,7 @@ int bloodDisplayBoundary;
 import ddf.minim.*;
 Minim minim;
 AudioPlayer sound_clock, sound_end, song;
-AudioSample sound_ghost, sound_hurt;
+AudioSample sound_ghost, sound_hurt,sound_jump,sound_burp,sound_powerUp;
 
 Loser loser=new Loser();
 Mom mom = new Mom();
@@ -65,13 +65,13 @@ Noodle[] noodles = new Noodle[2];
 Photo photo = new Photo();
 
 void setup() {
-  size(800, 480);
+  size(800, 480,P2D);
   startScene = loadImage("img/startScene/startScene.png");
   startButton1 = loadImage("img/startScene/startButton1.png");
   startButton2 = loadImage("img/startScene/startButton2.png");
   background1 = loadImage("img/background/background1.jpg");
-  background2 = loadImage("img/background2.jpg");
-  background3 = loadImage("img/background3.jpg");
+  background2 = loadImage("img/background/background2.jpg");
+  background3 = loadImage("img/background/background3.jpg");
   loseScene1 = loadImage("img/loseScene/gameLose1.png");
   loseScene2 = loadImage("img/loseScene/gameLose2.png");
   loseScene3 = loadImage("img/loseScene/gameLose3.png");
@@ -111,6 +111,7 @@ void setup() {
   stage3 = loadImage("img/startScene/stage3.png");
   eyeball = loadImage("img/horribleItem/eyeBall.png");
   hand = loadImage("img/horribleItem/handlong.png");
+  shadow = loadImage("img/shadow.png");
 
   //bloodItem
   beerImg = loadImage("img/bloodItem/beerTaiwan.png");
@@ -124,6 +125,9 @@ void setup() {
   song = minim.loadFile("sound/THE OMEN.mp3");
   sound_hurt = minim.loadSample("sound/hurt.mp3", 128);
   sound_ghost = minim.loadSample("sound/ghost_attack.mp3", 128);
+  sound_jump = minim.loadSample("sound/jump.mp3", 128);
+  sound_powerUp = minim.loadSample("sound/powerup.mp3", 128);
+  sound_burp = minim.loadSample("sound/burp.mp3", 128);
   //blood
   blood = loadImage("img/blood.png");
   //icons
@@ -564,6 +568,9 @@ void keyPressed() {
       rightState = true;
       break;
     case UP:
+    if(loser.y>=280){
+      sound_jump.trigger();
+    }
       upState = true;
       break;
     }

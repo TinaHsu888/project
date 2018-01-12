@@ -62,7 +62,7 @@ class Gas {
       isAlive = true;
       dad.gasTime = dad.GAS_COOLDOWN;
       //sound
-      sound_hurt.trigger();
+      sound_burp.trigger();
     }
   }
 }

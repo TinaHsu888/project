@@ -16,6 +16,7 @@ class Beer {
   void display() {
     if (isAlive == true) {  
       x-=xSpeed;
+      image(shadow,x+6,396,15,5);      
       image(beerImg, x, y);
     }
     bloodTime --;
@@ -28,10 +29,11 @@ class Beer {
 
   void checkCollision(Loser loser) {
     if (loser.health<loser.LOSER_MAX_HEALTH) {
-      if (isAlive==true && isHit(x, y, w, h, loser.x, loser.y, loser.w, loser.h)) {
+      if (isAlive==true && isHit(x, y, w, h, loser.x+15, loser.y, loser.w, loser.h)) {
         loser.health++;
         isAlive = false;
         bloodTime = 100;
+        sound_powerUp.trigger();
       }
     }
   }

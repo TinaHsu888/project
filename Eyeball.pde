@@ -24,11 +24,12 @@ class Eyeball{
   }
   
   void display(){
+    image(shadow,eyeballX+11,383,30,10); 
     pushMatrix();
     translate(eyeballX+30,eyeballY+30);
     rotate(-angle);
     image(eyeball,-30 ,-30);
-    popMatrix();
+    popMatrix();   
     angle += 0.1;
     
   }
@@ -54,7 +55,7 @@ class Eyeball{
        loser.hurt();
        HurtTime=120;
        //sound
-        sound_hurt.trigger();
+       sound_hurt.trigger();
       }
     }
   }

@@ -42,6 +42,7 @@ class Photo {
         loser.health++;
         isAlive = false;
         bloodTime = 100;
+        sound_powerUp.trigger();        
       }
     }
   }

@@ -13,6 +13,7 @@ class Noodle {
 
   void display() {
     if (isAlive == true) {  
+      image(shadow,x+8,396,15,5);
       image(noodleImg, x, y);
     }
     bloodTime --;
@@ -27,6 +28,7 @@ class Noodle {
         loser.health++;
         isAlive = false;
         bloodTime = 100;
+        sound_powerUp.trigger();
       }
     }
   }

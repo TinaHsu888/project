@@ -14,7 +14,7 @@ class Chaser {
   }
 
   int checkCollision(Loser loser) {
-    if (beChased(x, w, loser.x)) {
+    if (beChased(x, w, loser.x+15)) {
       currentState = gameState; 
       gameState=GAME_OVER;
     }
@@ -32,6 +32,7 @@ class Chaser {
         runCount=0;
       }
     }  
+    image(shadow,x+15,396,30,10);
     image(Display, x, y);
   }
 

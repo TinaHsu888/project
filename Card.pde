@@ -26,9 +26,10 @@ class Card {
   }
   void checkCollision(Loser loser) {
     if (cardHurtTime<=0) {
-      if (isHit(x+x2, y, w, h, loser.x, loser.y, loser.w, loser.h)) {
+      if (isHit(x+x2, y, w, h, loser.x+15, loser.y, loser.w, loser.h)) {
         loser.hurt();
         cardHurtTime=120;
+        sound_hurt.trigger();
       }
     }
   }
