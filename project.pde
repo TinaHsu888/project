@@ -14,6 +14,7 @@ PImage eyeball, hand;
 PImage blood,shadow;
 PImage explain,stage1,stage2,stage3;
 PImage soundiconOFF,soundiconON,stopicon;
+PImage win;
 
 final int GAME_START = 0, GAME_RUN1 = 1, GAME_RUN2 = 2, GAME_RUN3 = 3, GAME_OVER = 4, GAME_WIN = 5, GAME_INFO = 6;
 int gameState = 0;
@@ -112,6 +113,7 @@ void setup() {
   eyeball = loadImage("img/horribleItem/eyeBall.png");
   hand = loadImage("img/horribleItem/handlong.png");
   shadow = loadImage("img/shadow.png");
+  win = loadImage("img/background/win.jpg");
 
   //bloodItem
   beerImg = loadImage("img/bloodItem/beerTaiwan.png");
@@ -530,6 +532,7 @@ void draw() {
     break;
 
   case GAME_WIN:
+    image(win,0,0);
 
     break;
 
