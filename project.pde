@@ -203,6 +203,7 @@ void draw() {
   case GAME_START:
     //backgroundsound
     sound_clock.play();
+    //sound_clock.playCount(2);
     //display start image
     image(startScene, 0, 0);
     //start button
@@ -609,6 +610,7 @@ void draw() {
     break;
 
   case GAME_STORY:
+    song.pause();
     //stage one story
     if (currentState==GAME_START) {
       sound_clock.play();
@@ -630,7 +632,6 @@ void draw() {
     }
     //stage two story
     if (currentState==GAME_RUN1) {
-      sound_clock.play();
 
       //show explain and stage name
       if (time>60*9) {
@@ -648,7 +649,6 @@ void draw() {
     }
     //stage three story
     if (currentState==GAME_RUN2) {
-      sound_clock.play();
 
       //show explain and stage name
       if (time>60*9) {
@@ -666,7 +666,6 @@ void draw() {
     }
     //stage win story
     if (currentState==GAME_RUN3) {
-      sound_clock.play();
 
       //show explain and stage name
       if (time>60*12) {
@@ -737,23 +736,3 @@ void show(PImage img1) {
     disPlay = false;
   }
 }
-//void explainShow(PImage img2){
-//  if(disPlayExplain){
-//      explainTime--;
-//      image(img2,0,0) ;
-//    } 
-//    if(explainTime<0){
-//      disPlayExplain = false;
-//      explainTime=300;
-//    }
-//}
-//void storyShow(PImage img3){
-//  if(disPlayStory){
-//      storyTime--;
-//      image(img3,0,0) ;
-//    } 
-//    if(storyTime<0){
-//      disPlayStory = false;
-//      storyTime=540;
-//    }
-//}
